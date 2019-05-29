@@ -110,7 +110,7 @@ def run(line,driver):
     
     #restaurant name
     
-    for i in range(23,25):
+    for i in range(1,315):
         
         try:    
             city = driver.find_element_by_xpath("""//*[@id="mw-content-text"]/div/table[5]/tbody/tr["""+str(i)+"""]/td[2]/i/a""")
