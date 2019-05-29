@@ -25,4 +25,4 @@ Median Household income
 Median Household value
 
 Google Webdriver is attached since webdriver services are used for automating webpage extraction. 
-Run the script kept in the same folder as webdriver and get the result in a csv format
+Run the script Topos_scraper.py kept in the same folder as webdriver and get the result in a csv format
