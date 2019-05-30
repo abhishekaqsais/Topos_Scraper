@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-This program takes URL page as input and creates data file for each of the restaurant listed in the URL page
-Created on Sat Nov  3 16:56:17 2018
+This program takes scrapes sity data from wikipedia and , using the city data, it scrapes data from another website, city-data.com.
 
-@author: Team 3
+@author: Abhishek Anand
 """
 
 from selenium import webdriver
@@ -12,12 +11,16 @@ import requests
 import string
 import re
 
+#Link to city-data which will be appended with city and state name to create a workable website URL
+
 city_data_link = 'http://www.city-data.com/city/'
 
 def addl_city_info(city,state):
     
     driver = webdriver.Chrome('chromedriver.exe')
-    
+
+#Data cleaning and city-state formation
+
     city = city.split('[')[0]
     
     if city == 'New York City':
@@ -55,7 +58,8 @@ def addl_city_info(city,state):
         driver.get(line)
     except:
         print('No URLs')
-    
+
+# Extract the fields male percent, female percent, age, income, and household value.
     try:    
         mal_pct = driver.find_element_by_xpath("""//*[@id="population-by-sex"]/div/table/tbody/tr[1]/td[2]""")
         mpct = mal_pct.text.replace("(","").replace("(","").replace("%","").replace(")","").split(" ")[1]
@@ -99,7 +103,8 @@ def addl_city_info(city,state):
 def run(line,driver):
     
     f=open('city_details_add.csv','w', encoding='utf-8-sig') # output file
-    
+
+# Column name in output file
     columnTitleRow = "2018 rank, City, State, 2018 Estimate, 2010 Census, Change(%), 2016 land area(sq mi), 2016 land area(sq km), 2016 population density(sq mi), 2016 population density(sq km), location, Male(%), Female(%), Median Age (yrs), Median Household income ($), Median Household value ($) \n"
     f.write(columnTitleRow)
 	        
@@ -108,10 +113,11 @@ def run(line,driver):
     except:
         print('No URLs')
     
-    #restaurant name
+# 314 cities from wikipedia
     
     for i in range(1,315):
-        
+
+# Extract all the info using XPATH
         try:    
             city = driver.find_element_by_xpath("""//*[@id="mw-content-text"]/div/table[5]/tbody/tr["""+str(i)+"""]/td[2]/i/a""")
         except:
@@ -187,7 +193,7 @@ def run(line,driver):
     f.close()
     
 if __name__=='__main__':
-    #i=0
+
 
     driver = webdriver.Chrome('chromedriver.exe')
     line = 'https://en.wikipedia.org/wiki/List_of_United_States_cities_by_population'
