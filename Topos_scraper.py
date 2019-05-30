@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-This program takes scrapes city data from wikipedia and , using the city data, it scrapes data from another website, city-data.com.
+This program scrapes city data from wikipedia and , using the city data, it scrapes data from another website, city-data.com.
 
 @author: Abhishek Anand
 """
@@ -14,6 +14,8 @@ import re
 #Link to city-data which will be appended with city and state name to create a workable website URL
 
 city_data_link = 'http://www.city-data.com/city/'
+
+# Additional city information - male %, female %, median age, median household income, and median household value scraped from http://www.city-data.com
 
 def addl_city_info(city,state):
     
@@ -47,7 +49,8 @@ def addl_city_info(city,state):
     
     print(city)
     print(state)
-           
+	
+# URL created for city-data.com           
     line = city_data_link + city + '-' + state + '.html'
     
     line = re.sub(' +', '-', line)
@@ -131,7 +134,6 @@ def run(line,driver):
                         city = driver.find_element_by_xpath("""//*[@id="mw-content-text"]/div/table[5]/tbody/tr["""+str(i)+"""]/td[2]""")
                     except:    
                         print("No cities found!")
-                        break
         
         try:            
             state = driver.find_element_by_xpath("""//*[@id="mw-content-text"]/div/table[5]/tbody/tr["""+str(i)+"""]/td[3]/a""")
@@ -140,7 +142,6 @@ def run(line,driver):
                 state = driver.find_element_by_xpath("""//*[@id="mw-content-text"]/div/table[5]/tbody/tr["""+str(i)+"""]/td[3]""")
             except:
                 print("No states found!")
-                break
                 
             
         try:
@@ -161,7 +162,6 @@ def run(line,driver):
                 change = driver.find_element_by_xpath("""//*[@id="mw-content-text"]/div/table[5]/tbody/tr["""+str(i)+"""]/td[6]""")
             except:
                 print("No change!")
-                break
         
         #print(change.text) 
         chg_text = change.text
