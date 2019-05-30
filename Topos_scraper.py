@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-This program takes scrapes sity data from wikipedia and , using the city data, it scrapes data from another website, city-data.com.
+This program takes scrapes city data from wikipedia and , using the city data, it scrapes data from another website, city-data.com.
 
 @author: Abhishek Anand
 """
